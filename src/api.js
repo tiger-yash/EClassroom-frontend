@@ -1,8 +1,9 @@
 import axios from "axios";
-// import Cookies from "js-cookie";
+// import { store } from "./index";
 
 export default axios.create({
   baseURL: "http://localhost:8000"
-  // xsrfCookieName: "csrftoken",
-  // xsrfHeaderName: "X-CSRFToken"
+  // headers: {
+  //   authorization: `Token ${() => store.getState().auth.userToken}`
+  // }
 });

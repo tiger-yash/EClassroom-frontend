@@ -4,17 +4,22 @@ import { Field, reduxForm } from "redux-form";
 import { redirect, signIn } from "../actions";
 import api from "../api";
 import Cookies from "js-cookie";
-import { getGoogleProfile, tryGoogleSignIn, tryG } from "../gauth";
+import { getGoogleProfile, tryGoogleSignIn } from "../gauth";
 import { LOCAL, GOOGLE } from "../constants";
 import { Link } from "react-router-dom";
 import "./Login.css";
 
 const LoginForm = props => {
-  const { isSignedIn, redirect, isGoogleSignedIn, handleSubmit, submitting } = props;
-  if (isSignedIn) {
-    redirect("/loggedin");
-    // will change the url to dashboard when that component is made
-  }
+  const { isSignedIn, redirect, isGoogleSignedIn, handleSubmit, submitting, signIn } = props;
+  const [toRedirect, setToRedirect] = useState(isSignedIn);
+  useEffect(() => {
+    (async () => {
+      if (toRedirect) {
+        await redirect("/loggedin");
+        // will change the url to dashboard when that component is made
+      }
+    })();
+  }, [toRedirect, redirect]);
 
   const renderGoogleAuthButton = () => {
     let onClick = null;
@@ -26,13 +31,15 @@ const LoginForm = props => {
           api
             .post("/auth/login/", {
               g_token: profile.getId(),
-              method: "google"
+              mode: "google",
+              username: "aditya"
             })
             .then(({ data }) => {
               const { token } = data;
               if (token) {
                 Cookies.set("token", token);
-                return signIn(token);
+                signIn(token);
+                setToRedirect(true);
               }
             })
             .catch(error => {
@@ -60,12 +67,13 @@ const LoginForm = props => {
 
   const submitHandler = values => {
     api
-      .post("/auth/login/", { ...values, method: "local" })
-      .then(({ data }) => {
+      .post("/auth/login/", { ...values, mode: LOCAL })
+      .then(async ({ data }) => {
         const { token } = data;
         if (token) {
           Cookies.set("token", token);
-          return signIn(token);
+          signIn(token);
+          setToRedirect(true);
         }
       })
       .catch(error => {
@@ -139,8 +147,6 @@ const mapStateToProps = state => {
 
 export default reduxForm({
   form: "login",
-  destroyOnUnmount: false,
-  forceUnregisterOnUnmount: true,
   validate
 })(
   connect(mapStateToProps, {

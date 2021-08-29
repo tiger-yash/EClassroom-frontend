@@ -1,8 +1,10 @@
 import { push } from "connected-react-router";
 import { SIGN_IN, SIGN_OUT, GAUTH_SIGN_IN, GAUTH_SIGN_OUT } from "../constants";
 import { getGoogleID, tryGoogleSignOut } from "../gauth";
+import Cookies from "js-cookie";
 
-export const redirect = path => dispatch => {
+export const redirect = path => async dispatch => {
+  // console.log(`redirecting to ${path}`);
   dispatch(push(path));
 };
 
@@ -14,9 +16,10 @@ export const tryLocalSignOut = () => {
   return;
 };
 
-export const signOut = () => dispatch => {
-  dispatch(redirect("/"));
-  dispatch(tryGoogleSignOut);
+export const signOut = () => async dispatch => {
+  await dispatch(redirect("/"));
+  await tryGoogleSignOut();
+  Cookies.remove("token");
   return dispatch({
     type: SIGN_OUT
   });

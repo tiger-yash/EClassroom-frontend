@@ -10,11 +10,21 @@ import { Link } from "react-router-dom";
 import "./Signup.css";
 
 const SignUpForm = props => {
-  const { redirect, isGoogleSignedIn, handleSubmit, submitting } = props;
+  const { redirect, isGoogleSignedIn, handleSubmit, submitting, signIn } = props;
   const [authMethod, setAuthMethod] = useState(LOCAL);
+  const [toRedirect, setToRedirect] = useState(false);
+
   useEffect(() => {
-    if (isGoogleSignedIn === false) setAuthMethod(LOCAL);
-  }, []);
+    (async () => {
+      if (toRedirect) {
+        await redirect("/loggedin");
+        // will change the url to dashboard when that component is made
+      }
+    })();
+  }, [toRedirect, redirect]);
+  // useEffect(() => {
+  //   if (isGoogleSignedIn === false) setAuthMethod(LOCAL);
+  // }, []);
 
   const renderGoogleAuthButton = () => {
     let onClick = null;
@@ -42,7 +52,7 @@ const SignUpForm = props => {
     );
   };
 
-  const submitHandler = values => {
+  const submitHandler = async values => {
     if (authMethod === GOOGLE) return googleSignUpSubmit(values);
     else return localSignUpSubmit(values);
   };
@@ -56,13 +66,14 @@ const SignUpForm = props => {
       is_teacher: values.role === TEACHER,
       mode: "local"
     };
-    api
+    return api
       .post("/auth/register/", submitValues)
       .then(({ data }) => {
         const { token } = data;
         if (token) {
           Cookies.set("token", token);
-          return signIn(token);
+          signIn(token);
+          setToRedirect(true);
         }
       })
       .catch(error => {
@@ -81,14 +92,14 @@ const SignUpForm = props => {
       is_teacher: values.role === TEACHER,
       mode: "google"
     };
-    api
+    return api
       .post("/auth/register/", submitValues)
       .then(({ data }) => {
         const { token } = data;
         if (token) {
           Cookies.set("token", token);
           signIn(token);
-          redirect("/loggedin");
+          setToRedirect(true);
         }
       })
       .catch(error => {
@@ -208,7 +219,7 @@ const validate = values => {
     errors.password_re = "Passwords do not match";
   }
   if (!values.email || values.email.trim() === "") errors.email = "Email cannot be blank";
-  else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(values.email))
+  else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(values.email))
     errors.email = "Not a valid Email";
   return errors;
 };
@@ -219,8 +230,6 @@ const mapStateToProps = state => {
 
 export default reduxForm({
   form: "signup",
-  destroyOnUnmount: false,
-  forceUnregisterOnUnmount: true,
   validate
 })(
   connect(mapStateToProps, {
