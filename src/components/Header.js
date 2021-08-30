@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "./Logo";
 import { connect } from "react-redux";
 import { signOut, redirect } from "../actions";
+import { Button } from "@material-ui/core";
 
 const Header = ({ signOut, isSignedIn, redirect }) => {
   const AuthButton = () => {
@@ -15,11 +16,9 @@ const Header = ({ signOut, isSignedIn, redirect }) => {
       text = "Sign In";
     }
     return (
-      <button
-        onClick={onClick}
-        className="flex items-center py-1.5 px-3 rounded-md text-white bg-blue-600">
+      <Button variant="contained" color="primary" onClick={onClick}>
         <p className="">{text}</p>
-      </button>
+      </Button>
     );
   };
   return (

@@ -1,11 +1,18 @@
 import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
-import { connectRouter } from "connected-react-router";
-import history from "../history";
 import authReducer from "./authReducer";
+import userReducer from "./userReducer";
+import routerReducer from "./routerReducer";
+import classReducer from "./classReducer";
+import testReducer from "./testReducer";
+import assignmentReducer from "./assignmentReducer";
 
 export default combineReducers({
-  router: connectRouter(history),
+  router: routerReducer,
   form: formReducer,
-  auth: authReducer
+  auth: authReducer,
+  user: userReducer,
+  classes: classReducer,
+  tests: testReducer,
+  assignments: assignmentReducer
 });

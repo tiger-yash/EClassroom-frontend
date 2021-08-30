@@ -4,6 +4,7 @@ import "./index.css";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import { ConnectedRouter, routerMiddleware } from "connected-react-router";
+import { StylesProvider } from "@material-ui/core/styles";
 import thunk from "redux-thunk";
 
 import App from "./components/App";
@@ -17,7 +18,9 @@ export const store = createStore(reducers, composeEnhancers(applyMiddleware(...m
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App />
+      <StylesProvider injectFirst>
+        <App />
+      </StylesProvider>
     </ConnectedRouter>
   </Provider>,
   document.getElementById("root")

@@ -5,23 +5,33 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Login from "./Login";
 import Signup from "./Signup";
+import Profile from "./Profile";
+import ClassView from "./ClassView";
 // eslint-disable-next-line
 import { GoogleAuth } from "../gauth";
 
+const NotFound = () => {
+  return (
+    <div>
+      <p>Page Not Found</p>
+    </div>
+  );
+};
 const App = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      <Switch>
-        <>
-          <Route path="/" component={Header} />
-          <div className="px-4">
-            <Route path="/" exact component={Home} />
-            <Route path="/login" exact component={Login} />
-            <Route path="/signup" exact component={Signup} />
-          </div>
-          <Route path="/" component={Footer} />
-        </>
-      </Switch>
+      <Header />
+      <div className="px-4">
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={Signup} />
+          <Route path="/profile" exact component={Profile} />
+          <Route path="/class" exact component={ClassView} />
+          <Route component={NotFound} />
+        </Switch>
+      </div>
+      <Footer />
     </div>
   );
 };
