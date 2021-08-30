@@ -4,7 +4,7 @@ import { push } from "connected-react-router";
 import { fetchUserProfile } from "../actions";
 
 const Profile = props => {
-  const { username, email, role, isSignedIn, push, fetchUserProfile } = props;
+  const { username, email, is_teacher, isSignedIn, push, fetchUserProfile } = props;
   useEffect(() => {
     if (!isSignedIn) push("/login");
   }, [isSignedIn, push]);
@@ -16,7 +16,7 @@ const Profile = props => {
     <div>
       <RenderField name="Username" value={username} />
       <RenderField name="Email" value={email} />
-      <RenderField name="Role" value={role} />
+      <RenderField name="Role" value={is_teacher? 'Teacher':'Student'} />
     </div>
   );
 };
