@@ -29,8 +29,6 @@ const classReducer = (state = INITIAL_STATE, action) => {
     case LEAVE_CLASS:
       return _.omit(state, action.payload);
     case FETCH_CLASSES:
-      // console.log(action.payload);
-      // console.log(_.mapKeys(action.payload, "id"));
       return { ...state, ..._.chain(action.payload).mapKeys("id").mapValues(format).value() };
     default:
       return state;

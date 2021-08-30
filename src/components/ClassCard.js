@@ -11,7 +11,6 @@ import { push } from "connected-react-router";
 
 const ClassCard = props => {
   const { classData, push } = props;
-  console.log(classData);
   return (
     <Grid item xs={3}>
       <Card variant="outlined" className="w-full h-full">

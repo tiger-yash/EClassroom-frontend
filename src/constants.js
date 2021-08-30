@@ -9,6 +9,9 @@ export const STUDENT = "student";
 export const TEACHER = "teacher";
 export const FETCH_PROFILE = "FETCH_PROFILE";
 
+export const SIGNUP_LOAD = "SIGNUP_LOAD";
+export const LOGIN_LOAD = "LOGIN_LOAD";
+
 export const CREATE_CLASS = "CREATE_CLASS";
 export const FETCH_CLASS = "FETCH_CLASS";
 export const FETCH_CLASSES = "FETCH_CLASSES";

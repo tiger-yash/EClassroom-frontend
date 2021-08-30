@@ -6,6 +6,8 @@ import routerReducer from "./routerReducer";
 import classReducer from "./classReducer";
 import testReducer from "./testReducer";
 import assignmentReducer from "./assignmentReducer";
+import loginReducer from "./loginReducer";
+import signupReducer from "./signupReducer";
 
 export default combineReducers({
   router: routerReducer,
@@ -14,5 +16,7 @@ export default combineReducers({
   user: userReducer,
   classes: classReducer,
   tests: testReducer,
-  assignments: assignmentReducer
+  assignments: assignmentReducer,
+  signup: signupReducer,
+  login: loginReducer
 });

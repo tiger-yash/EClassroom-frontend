@@ -12,12 +12,11 @@ const RenderSelect = props => {
     label,
     meta: { touched, error }
   } = props;
-  console.log(`${input.name}-label`);
   const labelId = `${input.name}-label`;
 
   return (
     <div className="mt-3">
-      <FormControl variant="outlined" error={touched && error} className="w-full">
+      <FormControl variant="outlined" error={Boolean(touched && error)} className="w-full">
         <InputLabel id={labelId}>{label}</InputLabel>
         <Select labelId={labelId} label="Age" {...input}>
           {options.map(option => (

@@ -21,11 +21,16 @@ import {
   FETCH_ASSIGNMENT,
   CREATE_ASSIGNMENT,
   DELETE_ASSIGNMENT,
-  SUBMIT_ASSIGNMENT
+  SUBMIT_ASSIGNMENT,
+  LOGIN_LOAD,
+  SIGNUP_LOAD
 } from "../constants";
 import { getGoogleID, tryGoogleSignOut } from "../gauth";
 import api from "../api";
 import Cookies from "js-cookie";
+
+export const loginLoad = data => ({ type: LOGIN_LOAD, payload: data });
+export const signupLoad = data => ({ type: SIGNUP_LOAD, payload: data });
 
 export const redirect = path => async dispatch => {
   return dispatch(push(path));

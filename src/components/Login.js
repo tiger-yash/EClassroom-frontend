@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import renderInput from "./RenderInput";
 
-const LoginForm = props => {
+let LoginForm = props => {
   const { isSignedIn, push, isGoogleSignedIn, handleSubmit, submitting, signIn } = props;
   const [toRedirect, setToRedirect] = useState(isSignedIn);
   useEffect(() => {
@@ -125,15 +125,15 @@ const validate = values => {
 };
 
 const mapStateToProps = state => {
-  return { ...state.auth };
+  return { ...state.auth, ...state.login };
 };
 
-export default reduxForm({
+LoginForm = reduxForm({
   form: "login",
   validate
-})(
-  connect(mapStateToProps, {
-    push,
-    signIn
-  })(LoginForm)
-);
+})(LoginForm);
+
+export default connect(mapStateToProps, {
+  push,
+  signIn
+})(LoginForm);

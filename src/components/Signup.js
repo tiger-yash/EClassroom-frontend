@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { push } from "connected-react-router";
-import { signIn } from "../actions";
+import { signIn, signupLoad } from "../actions";
 import api from "../api";
 import { getGoogleProfile, tryGoogleSignIn } from "../gauth";
 import { LOCAL, GOOGLE, STUDENT, TEACHER } from "../constants";
@@ -11,8 +11,10 @@ import { Button } from "@material-ui/core";
 import renderInput from "./RenderInput";
 import renderSelect from "./RenderSelect";
 
-const SignUpForm = props => {
-  const { push, isGoogleSignedIn, handleSubmit, submitting, signIn } = props;
+const SignUpFormComponent = props => {
+  const { push, isGoogleSignedIn, handleSubmit, submitting, signIn, signupLoad } = props;
+  console.log(props.initialValues);
+  console.log(props);
   const [authMethod, setAuthMethod] = useState(LOCAL);
   const [toRedirect, setToRedirect] = useState(false);
 
@@ -21,9 +23,9 @@ const SignUpForm = props => {
       push("/class");
     }
   }, [toRedirect, push]);
-  // useEffect(() => {
-  //   if (isGoogleSignedIn === false) setAuthMethod(LOCAL);
-  // }, []);
+  useEffect(() => {
+    if (isGoogleSignedIn === false) setAuthMethod(LOCAL);
+  }, [isGoogleSignedIn]);
 
   const renderGoogleAuthButton = () => {
     let onClick = null;
@@ -32,6 +34,12 @@ const SignUpForm = props => {
         try {
           await tryGoogleSignIn();
           setAuthMethod(GOOGLE);
+          const profile = getGoogleProfile();
+
+          signupLoad({
+            username: profile.getName(),
+            email: profile.getEmail()
+          });
         } catch (e) {
           console.log(e);
         }
@@ -123,15 +131,17 @@ const SignUpForm = props => {
 
         <Field name="role" component={renderSelect} options={["", STUDENT, TEACHER]} label="Role" />
         <div className="flex mt-3">
-          {/* <Button
-          onClick={() => setAuthMethod(LOCAL)}
-          variant="contained"
-          color="primary"
-          type="submit"
-          className="mr-3"
-          disabled={submitting}>
-          Username Sign Up
-        </Button> */}
+          <Button
+            onClick={() => {
+              setAuthMethod(LOCAL);
+              signupLoad({});
+            }}
+            variant="contained"
+            color="primary"
+            className="mr-3"
+            disabled={submitting}>
+            Email Sign Up
+          </Button>
           {renderGoogleAuthButton()}
           <Button
             variant="contained"
@@ -172,6 +182,8 @@ const validate = values => {
     errors.password = "Passwords do not match";
     errors.password_re = "Passwords do not match";
   }
+  if (!values.password_re) errors.password_re = "You must enter your password again.";
+
   if (!values.email || values.email.trim() === "") errors.email = "Email cannot be blank";
   else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(values.email))
     errors.email = "Not a valid Email";
@@ -180,15 +192,17 @@ const validate = values => {
 };
 
 const mapStateToProps = state => {
-  return { ...state.auth };
+  console.log({ ...state.auth, initialValues: { ...state.signup } });
+  return { ...state.auth, initialValues: { ...state.signup } };
 };
 
-export default reduxForm({
+const SignUpForm = reduxForm({
   form: "signup",
   validate
-})(
-  connect(mapStateToProps, {
-    push,
-    signIn
-  })(SignUpForm)
-);
+})(SignUpFormComponent);
+
+export default connect(mapStateToProps, {
+  push,
+  signIn,
+  signupLoad
+})(SignUpForm);
