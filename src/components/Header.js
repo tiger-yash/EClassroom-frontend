@@ -1,9 +1,10 @@
 import React from "react";
 import Logo from "./Logo";
 import { connect } from "react-redux";
-import { signOut, redirect } from "../actions";
+import { signOut, redirect, joinClass } from "../actions";
 import { Button } from "@material-ui/core";
 import SideNav from "./SideNav";
+// import JoinClassButton from './JoinClassButton'
 
 const Header = ({ signOut, isSignedIn, redirect }) => {
   const AuthButton = () => {
@@ -37,5 +38,6 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   signOut,
+  joinClass
   redirect
 })(Header);
