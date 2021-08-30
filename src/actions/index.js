@@ -92,7 +92,7 @@ export const createClass = classData => async dispatch => {
 };
 
 export const joinClass = classCode => async dispatch => {
-  const response = await api.post("/path/for/join/class/", { class_code: classCode });
+  const response = await api.post("/student/class/", { class_code: classCode });
   const { data } = response;
   dispatch({
     type: JOIN_CLASS,
