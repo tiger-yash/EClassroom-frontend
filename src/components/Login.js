@@ -13,12 +13,9 @@ const LoginForm = props => {
   const { isSignedIn, push, isGoogleSignedIn, handleSubmit, submitting, signIn } = props;
   const [toRedirect, setToRedirect] = useState(isSignedIn);
   useEffect(() => {
-    (async () => {
-      if (toRedirect) {
-        await push("/profile");
-        // will change the url to dashboard when that component is made
-      }
-    })();
+    if (toRedirect) {
+      push("/class");
+    }
   }, [toRedirect, push]);
 
   const renderGoogleAuthButton = () => {

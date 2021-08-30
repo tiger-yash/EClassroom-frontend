@@ -79,6 +79,7 @@ export const fetchUserProfile = () => async dispatch => {
 export const createClass = classData => async dispatch => {
   const response = await api.post("/class/", classData);
   const { data } = response;
+  console.log(response);
   dispatch({
     type: CREATE_CLASS,
     payload: data

@@ -1,5 +1,6 @@
 import { FETCH_PROFILE, SIGN_OUT, STUDENT, TEACHER } from "../constants";
 const INITIAL_STATE = {
+  hasUserData: false,
   username: null,
   email: null,
   isStudent: null,
@@ -14,6 +15,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
       const role = action.payload.isStudent ? STUDENT : TEACHER;
       return {
         ...state,
+        hasUserData: true,
         username: data.username,
         email: data.email,
         isStudent: data.is_student,
