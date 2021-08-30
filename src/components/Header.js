@@ -38,6 +38,6 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   signOut,
-  joinClass
+  joinClass,
   redirect
 })(Header);
