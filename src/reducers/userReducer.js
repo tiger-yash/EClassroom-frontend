@@ -12,7 +12,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FETCH_PROFILE:
       const data = action.payload;
-      const role = action.payload.isStudent ? STUDENT : TEACHER;
+      const role = action.payload.is_student ? STUDENT : TEACHER;
       return {
         ...state,
         hasUserData: true,
