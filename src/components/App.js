@@ -6,7 +6,7 @@ import Footer from "./Footer";
 import Login from "./Login";
 import Signup from "./Signup";
 import Profile from "./Profile";
-import ClassView from "./ClassView";
+import AllClassView from "./AllClassView";
 // eslint-disable-next-line
 import { GoogleAuth } from "../gauth";
 
@@ -27,7 +27,7 @@ const App = () => {
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/profile" exact component={Profile} />
-          <Route path="/class" exact component={ClassView} />
+          <Route path="/class" exact component={AllClassView} />
           <Route component={NotFound} />
         </Switch>
       </div>
