@@ -12,7 +12,7 @@ const JoinClassCard = props => {
 
   const submit=()=>{
     confirm()
-    joinClass({ class_code: classCode })
+    joinClass(classCode)
     setClassCode("")
   }
 
