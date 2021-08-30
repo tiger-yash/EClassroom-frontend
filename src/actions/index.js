@@ -28,7 +28,6 @@ import api from "../api";
 import Cookies from "js-cookie";
 
 export const redirect = path => async dispatch => {
-  // console.log(`redirecting to ${path}`);
   return dispatch(push(path));
 };
 
@@ -42,7 +41,6 @@ export const signOut = () => async dispatch => {
 };
 
 export const signIn = userToken => {
-  console.log(userToken);
   Cookies.set("token", userToken);
   if (userToken)
     return {
@@ -66,19 +64,16 @@ export const changeAuthGoogle = status => {
 };
 
 export const fetchUserProfile = () => async dispatch => {
-  api
-    .get("/auth/profile/")
-    .then(({ data }) => {
-      console.log(`Token ${Cookies.get("token")}`);
-      dispatch({
-        type: FETCH_PROFILE,
-        payload: data
-      });
-    })
-    .catch(error => {
-      if (error.response && error.response.data) console.log(error.response.data);
-      console.dir(error.request);
+  await api.get("/auth/profile/").then(({ data }) => {
+    dispatch({
+      type: FETCH_PROFILE,
+      payload: data
     });
+  });
+  // .catch(error => {
+  //   if (error.response && error.response.data) console.log(error.response.data);
+  //   console.dir(error.request);
+  // });
 };
 
 export const createClass = classData => async dispatch => {

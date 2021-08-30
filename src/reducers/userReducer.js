@@ -12,10 +12,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case FETCH_PROFILE:
       const data = action.payload;
       const role = action.payload.isStudent ? STUDENT : TEACHER;
-      console.log({ ...state, ...data, role });
-      console.log({ state });
-      console.log({ ...data, role });
-      return { ...state, ...data, role };
+      return {
+        ...state,
+        username: data.username,
+        email: data.email,
+        isStudent: data.is_student,
+        isTeacher: data.is_teacher,
+        role
+      };
     case SIGN_OUT:
       return INITIAL_STATE;
     default:
