@@ -35,7 +35,7 @@ const ClassView = props => {
   // console.log(classes);
 
   return (
-    <Grid container className="mt-3 mx-auto items-stretch" spacing={2}>
+    <Grid container className="mt-3 items-stretch" spacing={2}>
       {isTeacher() ? <NewClassCard /> : null}
       {/* {isStudent() ? <JoinClassCard /> : null} */}
       {classes.map(classData => (

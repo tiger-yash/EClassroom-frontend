@@ -7,7 +7,7 @@ import api from "../api";
 import { getGoogleProfile, tryGoogleSignIn } from "../gauth";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
-import renderInput from "./RenderInput";
+import RenderInput from "./RenderInput";
 import _ from "lodash";
 
 let LoginForm = props => {
@@ -91,8 +91,8 @@ let LoginForm = props => {
   const renderFormFields = () => {
     return (
       <>
-        <Field name="username" type="text" component={renderInput} label="Username" />
-        <Field name="password" type="password" component={renderInput} label="Password" />
+        <Field name="username" type="text" component={RenderInput} label="Username" />
+        <Field name="password" type="password" component={RenderInput} label="Password" />
       </>
     );
   };

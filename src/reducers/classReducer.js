@@ -13,7 +13,8 @@ const format = data => {
   return {
     id: data.id,
     classCode: data.class_code,
-    subject: data.subject
+    subject: data.subject,
+    teacher: data.teacher
   };
 };
 const classReducer = (state = INITIAL_STATE, action) => {
@@ -29,7 +30,7 @@ const classReducer = (state = INITIAL_STATE, action) => {
     case LEAVE_CLASS:
       return _.omit(state, action.payload);
     case FETCH_CLASSES:
-      return { ...state, ..._.chain(action.payload).mapKeys("id").mapValues(format).value() };
+      return _.chain(action.payload).mapKeys("id").mapValues(format).value();
     default:
       return state;
   }

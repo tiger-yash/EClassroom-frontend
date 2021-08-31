@@ -7,13 +7,23 @@ import CardContent from "@material-ui/core/CardContent";
 // import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { push } from "connected-react-router";
-// import { makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
+import clsx from "clsx";
+const useStyles = makeStyles(theme => ({
+  root: {
+    [theme.breakpoints.down("sm")]: {
+      minHeight: 250
+    },
+    minHeight: 300
+  }
+}));
 
 const ClassCard = props => {
   const { classData, push } = props;
+  const classes = useStyles();
   return (
-    <Grid item xs={3}>
-      <Card variant="outlined" className="w-full h-full">
+    <Grid item xs={12} sm={4} md={3}>
+      <Card variant="outlined" className={clsx(classes.root, "w-full h-full")}>
         <CardContent
           onClick={() => push(`/class/${classData.id}`)}
           className="bg-gray-500 text-white pb-6 cursor-pointer">

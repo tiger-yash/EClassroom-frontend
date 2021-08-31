@@ -13,9 +13,6 @@ const CustomSnackBar = ({ snackPack = [], snackBarClose }) => {
   const [open, setOpen] = React.useState(false);
   const [messageInfo, setMessageInfo] = React.useState(undefined);
 
-  console.log(messageInfo);
-  console.log(snackPack);
-
   React.useEffect(() => {
     if (snackPack.length && !messageInfo) {
       // Set a new snack when we don't have an active one
@@ -40,7 +37,11 @@ const CustomSnackBar = ({ snackPack = [], snackBarClose }) => {
   };
 
   return (
-    <Snackbar open={open} autoHideDuration={2000} onClose={handleClose} onExited={handleExited}>
+    <Snackbar
+      open={open}
+      autoHideDuration={2000}
+      onClose={handleClose}
+      TransitionProps={{ onExited: handleExited }}>
       <Alert onClose={handleClose} severity={messageInfo ? messageInfo.type : null}>
         {messageInfo ? messageInfo.message : null}
       </Alert>
