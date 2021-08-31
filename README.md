@@ -1,8 +1,61 @@
-# Getting Started with Create React App
+# EClassroom
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+EClassroom is an all purpose online classroom web application which provides students and teachers with various features at par with an offline class environment.
+
+Website Link : https://eclassroom.vercel.app/
+
+Github Repositories : 
+
+* FrontEnd - https://github.com/tiger-yash/EClassroom-frontend
+ 
+* BackEnd - https://github.com/tiger-yash/EClassroom-backend
+
+## About
+
+* FrontEnd: The Front End of the Web Application is made using ReactJS and Redux making the website extremely reactive and responsive. 
+
+* BackEnd: The Back End is made in Django REST framework and the created APIs allow frontend to fetch all the necessary information from the user data to the test marks of the students.
+
+# Features
+
+The Features provided by our platform  
+
+## AUTHENTICATION :
+
+* The Users can Register either by filling up their emails and unique username or by using **GOOGLE SIGNUP** .
+
+* The users can similarly Login by any of the 2 methods that are either username and password login or **GOOGLE LOGIN**.
+
+![Screenshot from 2021-08-31 20-32-32](https://user-images.githubusercontent.com/74406801/131534591-35f6eae1-64ee-4d38-87c9-93f61bd8d02b.png)
+![Screenshot from 2021-08-31 20-32-25](https://user-images.githubusercontent.com/74406801/131534602-a0e9aadd-c1ba-449f-8a20-39ad00649d96.png)
+
+
+## FOR TEACHERS:
+
+* Teachers can  create classes for their subjects.
+* The DashBoard will display all the classes they are Teaching in.
+* They can generate the code for their class and share the code with the students so that they can join the class.
+* They can view all the members of the class.
+* They can create Assignments and Tests for the students providing the links and assigning deadlines. The tests/assignments will also have final dates after which * * submissions won’t be accepted and submissions between the due date and end date will be considered as late submissions.
+* Teachers will also be able to view the submissions and mark the students which data is shared with them immediately.
+* Teachers can also join other classes as Teaching Assistants or Co-Teachers and assist the Class Teacher handle student submissions.
+
+## FOR STUDENTS: 
+
+* Students can join any class using the 7-digit Class Code provided to them by the teacher.
+* The DashBoard will display all the classes they are studying in.
+* Students will be able to view all the members of the class.
+* They can view assignments and tests assigned to them by the teacher.
+* They can make submissions to the assigned tests and assignments, by providing the links to the PDFs uploaded on any secure server with access to the teacher.
+* They can also edit their submissions.
+* One Bonus feature is that the previous submissions are only overridden and not deleted, so once submitted it won’t be possible for them to submit nothing which is a major feature.
+* After getting marked the students will be able to view them in that particular Test/Assignment.
+* Students can unenroll from classes.
+
+
+# To Run Locally
 
 In the project directory, you can run:
 ### `yarn install`
@@ -12,60 +65,4 @@ To run the app in the development mode :\
 ### `yarn start`
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
