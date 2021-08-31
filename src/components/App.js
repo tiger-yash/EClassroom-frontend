@@ -7,6 +7,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Profile from "./Profile";
 import AllClassView from "./AllClassView";
+import SnackBar from "./SnackBar";
 // eslint-disable-next-line
 import { GoogleAuth } from "../gauth";
 
@@ -21,6 +22,7 @@ const App = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
+      <SnackBar />
       <div className="px-4">
         <Switch>
           <Route path="/" exact component={Home} />

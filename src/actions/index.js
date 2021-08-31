@@ -22,15 +22,41 @@ import {
   CREATE_ASSIGNMENT,
   DELETE_ASSIGNMENT,
   SUBMIT_ASSIGNMENT,
-  LOGIN_LOAD,
-  SIGNUP_LOAD
+  SNACKBAR_ERROR,
+  SNACKBAR_INFO,
+  SNACKBAR_CLOSE,
+  SNACKBAR_SUCCESS
 } from "../constants";
 import { getGoogleID, tryGoogleSignOut } from "../gauth";
 import api from "../api";
 import Cookies from "js-cookie";
 
-export const loginLoad = data => ({ type: LOGIN_LOAD, payload: data });
-export const signupLoad = data => ({ type: SIGNUP_LOAD, payload: data });
+export const snackBarInfo = message => {
+  return {
+    type: SNACKBAR_INFO,
+    payload: { message, key: new Date().getTime() }
+  };
+};
+
+export const snackBarError = message => {
+  return {
+    type: SNACKBAR_ERROR,
+    payload: { message, key: new Date().getTime() }
+  };
+};
+
+export const snackBarSuccess = message => {
+  return {
+    type: SNACKBAR_SUCCESS,
+    payload: { message, key: new Date().getTime() }
+  };
+};
+
+export const snackBarClose = () => {
+  return {
+    type: SNACKBAR_CLOSE
+  };
+};
 
 export const redirect = path => async dispatch => {
   return dispatch(push(path));
@@ -40,18 +66,20 @@ export const signOut = () => async dispatch => {
   Cookies.remove("token");
   await dispatch(redirect("/"));
   await tryGoogleSignOut();
-  return dispatch({
+  dispatch({
     type: SIGN_OUT
   });
+  dispatch(snackBarSuccess("Signed Out"));
 };
 
-export const signIn = userToken => {
+export const signIn = userToken => dispatch => {
   Cookies.set("token", userToken);
-  if (userToken)
-    return {
-      type: SIGN_IN,
-      payload: userToken
-    };
+  // if (userToken)
+  dispatch({
+    type: SIGN_IN,
+    payload: userToken
+  });
+  dispatch(snackBarSuccess("Signed In"));
 };
 
 export const changeAuthGoogle = status => {

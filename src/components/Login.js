@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { push } from "connected-react-router";
-import { signIn } from "../actions";
+import { signIn, snackBarError } from "../actions";
 import api from "../api";
 import { getGoogleProfile, tryGoogleSignIn } from "../gauth";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import renderInput from "./RenderInput";
+import _ from "lodash";
 
 let LoginForm = props => {
-  const { isSignedIn, push, isGoogleSignedIn, handleSubmit, submitting, signIn } = props;
+  const { isSignedIn, push, isGoogleSignedIn, handleSubmit, submitting, signIn, snackBarError } =
+    props;
   const [toRedirect, setToRedirect] = useState(isSignedIn);
   useEffect(() => {
     if (toRedirect) {
@@ -39,11 +41,14 @@ let LoginForm = props => {
               }
             })
             .catch(error => {
-              if (error.response && error.response.data) console.log(error.response.data);
-              console.log(error);
+              if (error.response && error.response.data && !_.isEmpty(error)) {
+                snackBarError(_.first(_.map(error.response.data, _.first)));
+              } else snackBarError(error.message);
             });
         } catch (e) {
           console.log(e);
+          if (e.error && e.error === "pop_up_closed_by_user") return;
+          snackBarError(e.message);
         }
       };
     }
@@ -74,8 +79,12 @@ let LoginForm = props => {
         }
       })
       .catch(error => {
-        if (error.response && error.response.data) console.log(error.response.data);
+        if (error.response && error.response.data && !_.isEmpty(error.response.data)) {
+          snackBarError(_.first(_.map(error.response.data, _.first)));
+          return console.log(error.response.data);
+        }
         console.log(error);
+        snackBarError(error.message);
       });
   };
 
@@ -125,7 +134,7 @@ const validate = values => {
 };
 
 const mapStateToProps = state => {
-  return { ...state.auth, ...state.login };
+  return { ...state.auth };
 };
 
 LoginForm = reduxForm({
@@ -135,5 +144,6 @@ LoginForm = reduxForm({
 
 export default connect(mapStateToProps, {
   push,
-  signIn
+  signIn,
+  snackBarError
 })(LoginForm);

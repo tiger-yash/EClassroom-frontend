@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 const INITIAL_STATE = {
   isSignedIn: Cookies.get("token") ? true : false,
   userToken: Cookies.get("token") || null,
-  googleSignedIn: null,
+  isGoogleSignedIn: null,
   googleId: null
 };
 

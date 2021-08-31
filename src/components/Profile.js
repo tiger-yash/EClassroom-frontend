@@ -33,4 +33,7 @@ const RenderField = props => {
 const mapStateToProps = state => {
   return { ...state.user, isSignedIn: state.auth.isSignedIn };
 };
-export default connect(mapStateToProps, { push, fetchUserProfile })(Profile);
+export default connect(mapStateToProps, {
+  push,
+  fetchUserProfile
+})(Profile);
