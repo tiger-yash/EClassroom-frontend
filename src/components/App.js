@@ -27,19 +27,27 @@ const App = () => {
     <div className="min-h-screen flex flex-col">
       <Header />
       <SnackBar />
-      <Container maxWidth="xl">
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/signup" exact component={Signup} />
-          <Route path="/profile" exact component={Profile} />
-          <Route path="/class" exact component={AllClassView} />
-          <Route path="/class/:classId/test/create" exact component={CreateTest} />
-          <Route path="/class/:classId/assignment/create" exact component={CreateAssignment} />
-          <Route path="/class/:classId/test/:testId" exact component={ViewTest} />
-          <Route component={NotFound} />
-        </Switch>
-      </Container>
+      
+
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route>
+          <Container maxWidth="xl">
+            <Switch>
+              <Route path="/login" exact component={Login} />
+              <Route path="/signup" exact component={Signup} />
+              <Route path="/profile" exact component={Profile} />
+              <Route path="/class" exact component={AllClassView} />
+              <Route path="/class/:classId/test/create" exact component={CreateTest} />
+              <Route path="/class/:classId/assignment/create" exact component={CreateAssignment} />
+              <Route component={NotFound} />
+            </Switch>
+          </Container>
+        </Route>
+
+      </Switch>
+
+
       <Footer />
     </div>
   );

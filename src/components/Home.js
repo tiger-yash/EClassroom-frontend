@@ -1,11 +1,10 @@
 import React from "react";
-
+import home from '../home.gif';
 const Home = () => {
   return (
-    <div className="">
-      <h1>Home Page</h1>
-      <p>lorem ipsum lorem ipsum lorem ipsum</p>
-    </div>
+    <>
+    <img alt="home" src={home} className="home" style={{width:"100%",padding:"0"}}></img>
+   </>
   );
 };
 
