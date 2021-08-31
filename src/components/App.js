@@ -17,6 +17,7 @@ import EditAssignment from "./EditAssignment";
 import ViewAssignment from "./ViewAssignment";
 
 // eslint-disable-next-line
+import "../gauth";
 import { GoogleAuth } from "../gauth";
 
 const NotFound = () => {

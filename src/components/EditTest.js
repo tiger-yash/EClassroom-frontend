@@ -29,10 +29,10 @@ const EditTest = props => {
   }, [change, testData, loaded]);
 
   useEffect(() => {
-    if (testId && classData.classCode) {
+    if (testId) {
       fetchTest(testId);
     }
-  }, [classData.classCode, fetchTest, testId]);
+  }, [fetchTest, testId]);
 
   const submitHandler = values => {
     console.log(values);

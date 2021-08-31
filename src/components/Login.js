@@ -68,7 +68,6 @@ let LoginForm = props => {
   };
 
   const submitHandler = values => {
-    console.log(values);
     api
       .post("/auth/login/", { ...values, mode: "local" })
       .then(async ({ data }) => {
