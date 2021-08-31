@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import { editTest, fetchTest } from "../actions";
@@ -6,31 +6,37 @@ import RenderInput from "./RenderInput";
 import RenderDate from "./RenderDate";
 import Button from "@material-ui/core/Button";
 import useIsClassTeacher from "../hooks/useIsClassTeacher";
+import _ from "lodash";
 
 const EditTest = props => {
   const { testData, classData, editTest, handleSubmit, submitting, change, fetchTest } = props;
+  const [loaded, setLoaded] = useState(false);
   const testId = props.match.params.testId;
+  const classId = props.match.params.classId;
+
   useIsClassTeacher({ redirect: true });
   useEffect(() => {
-    if (testData) {
-      console.log(testData);
-      change("test", testData.testName);
-      change("url", testData.url);
-      change("max_marks", testData.maxMarks);
-      change("due_date", testData.dueDate);
-      change("end_date", testData.endDate);
+    if (!_.isEmpty(testData)) {
+      if (!loaded) {
+        change("test", testData.testName);
+        change("url", testData.url);
+        change("max_marks", testData.maxMarks);
+        change("due_date", testData.dueDate);
+        change("end_date", testData.endDate);
+        setLoaded(true);
+      }
     }
-  }, [change, testData]);
+  }, [change, testData, loaded]);
 
   useEffect(() => {
     if (testId && classData.classCode) {
-      console.log(testId, classData.classCode);
       fetchTest(testId);
     }
   }, [classData.classCode, fetchTest, testId]);
 
   const submitHandler = values => {
-    editTest({ ...values, class_code: classData.classCode });
+    console.log(values);
+    editTest(classId, testId, { ...values, class_code: classData.classCode });
   };
   return (
     <div className="w-1/2 mx-auto mt-4">

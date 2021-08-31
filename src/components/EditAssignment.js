@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import { editAssignment, fetchAssignment } from "../actions";
@@ -6,6 +6,7 @@ import RenderInput from "./RenderInput";
 import RenderDate from "./RenderDate";
 import Button from "@material-ui/core/Button";
 import useIsClassTeacher from "../hooks/useIsClassTeacher";
+import _ from "lodash";
 
 const EditAssignment = props => {
   const {
@@ -18,27 +19,31 @@ const EditAssignment = props => {
     fetchAssignment
   } = props;
   const assignmentId = props.match.params.assignmentId;
+  const classId = props.match.params.classId;
+  const [loaded, setLoaded] = useState(false);
+
   useIsClassTeacher({ redirect: true });
   useEffect(() => {
-    if (assignmentData) {
-      console.log(assignmentData);
-      change("assignment", assignmentData.assignmentName);
-      change("url", assignmentData.url);
-      change("max_marks", assignmentData.maxMarks);
-      change("due_date", assignmentData.dueDate);
-      change("end_date", assignmentData.endDate);
+    if (!_.isEmpty(assignmentData)) {
+      if (!loaded) {
+        setLoaded(true);
+        change("assignment", assignmentData.assignmentName);
+        change("url", assignmentData.url);
+        change("max_marks", assignmentData.maxMarks);
+        change("due_date", assignmentData.dueDate);
+        change("end_date", assignmentData.endDate);
+      }
     }
-  }, [change, assignmentData]);
+  }, [change, assignmentData, loaded]);
 
   useEffect(() => {
     if (assignmentId && classData.classCode) {
-      console.log(assignmentId, classData.classCode);
       fetchAssignment(assignmentId);
     }
   }, [classData.classCode, fetchAssignment, assignmentId]);
 
   const submitHandler = values => {
-    editAssignment({ ...values, class_code: classData.classCode });
+    editAssignment(classId, assignmentId, { ...values, class_code: classData.classCode });
   };
   return (
     <div className="w-1/2 mx-auto mt-4">

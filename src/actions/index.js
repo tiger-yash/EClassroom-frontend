@@ -186,7 +186,6 @@ export const fetchAllAssignments = classCode => async dispatch => {
 };
 
 export const fetchTest = testId => async dispatch => {
-  console.log(`/student/test/${testId}`);
   const response = await api.get(`/student/test/${testId}`);
   const { data } = response;
   dispatch({
@@ -195,17 +194,16 @@ export const fetchTest = testId => async dispatch => {
   });
 };
 
-export const fetchAssignment = (classCode, assignmentId) => async dispatch => {
-  const response = await api.get(`/student/assignment/${assignmentId}/`, { class_code: classCode });
+export const fetchAssignment = assignmentId => async dispatch => {
+  const response = await api.get(`/student/assignment/${assignmentId}/`);
   const { data } = response;
   dispatch({
     type: FETCH_ASSIGNMENT,
-    payload: data
+    payload: { ...data, id: assignmentId }
   });
 };
 
-export const createTest = testData => async dispatch => {
-  console.log(testData);
+export const createTest = (classId, testData) => async dispatch => {
   const response = await api.post("/class/test/", testData).catch(error => {
     console.log(error);
     console.log(error.response);
@@ -220,34 +218,41 @@ export const createTest = testData => async dispatch => {
       type: CREATE_TEST,
       payload: data
     });
+    dispatch(push(`/class/${classId}/test/${data.id}/`));
   }
 };
 
-export const createAssignment = assignmentData => async dispatch => {
+export const createAssignment = (classId, assignmentData) => async dispatch => {
   const response = await api.post("/class/assignment/", assignmentData);
   const { data } = response;
   dispatch({
     type: CREATE_ASSIGNMENT,
     payload: data
   });
+  dispatch(push(`/class/${classId}/assignment/${data.id}/`));
 };
 
-export const editTest = (classCode, testData) => async dispatch => {
-  const response = await api.post("/class/test/", testData);
+export const editTest = (classId, testId, testData) => async dispatch => {
+  // console.log({})
+  // console.log(testData);
+  const response = await api.put("/class/test/", { ...testData, id: testId });
   const { data } = response;
+  console.log(data);
   dispatch({
     type: EDIT_TEST,
     payload: data
   });
+  dispatch(push(`/class/${classId}/test/${testId}/`));
 };
 
-export const editAssignment = (classCode, assignmentData) => async dispatch => {
-  const response = await api.post("/class/assignment/", assignmentData);
+export const editAssignment = (classId, assignmentId, assignmentData) => async dispatch => {
+  const response = await api.put("/class/assignment/", assignmentData);
   const { data } = response;
   dispatch({
     type: EDIT_ASSIGNMENT,
     payload: data
   });
+  dispatch(push(`/class/${classId}/assignment/${assignmentId}/`));
 };
 
 export const deleteTest = (classCode, testId) => async dispatch => {

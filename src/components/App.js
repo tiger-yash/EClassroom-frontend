@@ -10,12 +10,14 @@ import AllClassView from "./AllClassView";
 import SnackBar from "./SnackBar";
 import Container from "@material-ui/core/Container";
 import CreateTest from "./CreateTest";
+import EditTest from "./EditTest";
+import ViewTest from "./ViewTest";
 import CreateAssignment from "./CreateAssignment";
+import EditAssignment from "./EditAssignment";
+import ViewAssignment from "./ViewAssignment";
+
 // eslint-disable-next-line
 import { GoogleAuth } from "../gauth";
-import ViewTest from "./ViewTest";
-import EditTest from "./EditTest";
-import EditAssignment from "./EditAssignment";
 
 const NotFound = () => {
   return (
@@ -48,6 +50,11 @@ const App = () => {
                 component={EditAssignment}
               />
               <Route path="/class/:classId/test/:testId" exact component={ViewTest} />
+              <Route
+                path="/class/:classId/assignment/:assignmentId"
+                exact
+                component={ViewAssignment}
+              />
               <Route component={NotFound} />
             </Switch>
           </Container>

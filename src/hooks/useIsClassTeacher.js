@@ -10,9 +10,8 @@ const useIsClassTeacher = config => {
   const { user, auth, classData } = useSelector(state => ({
     user: state.user,
     auth: state.auth,
-    classData: state.classes[classId]
+    classData: state.classes[classId] ?? {}
   }));
-  // console.log(user, auth, classData);
 
   useEffect(() => {
     dispatch(fetchClass(classId));
