@@ -13,6 +13,7 @@ import CreateTest from "./CreateTest";
 import CreateAssignment from "./CreateAssignment";
 // eslint-disable-next-line
 import { GoogleAuth } from "../gauth";
+import ViewTest from "./ViewTest";
 
 const NotFound = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
           <Route path="/class" exact component={AllClassView} />
           <Route path="/class/:classId/test/create" exact component={CreateTest} />
           <Route path="/class/:classId/assignment/create" exact component={CreateAssignment} />
+          <Route path="/class/:classId/test/:testId" exact component={ViewTest} />
           <Route component={NotFound} />
         </Switch>
       </Container>

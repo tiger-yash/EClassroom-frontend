@@ -9,7 +9,7 @@ import useIsClassTeacher from "../hooks/useIsClassTeacher";
 
 const CreateAssignment = props => {
   const { createAssignment, handleSubmit, submitting } = props;
-  const isClassTeacher = useIsClassTeacher();
+  const isClassTeacher = useIsClassTeacher({ redirect: true });
   console.log(isClassTeacher);
 
   return (
@@ -17,8 +17,8 @@ const CreateAssignment = props => {
       <h2 className="text-xl">Create Assignment</h2>
 
       <form onSubmit={handleSubmit(createAssignment)}>
-        <Field name="test_name" type="text" component={RenderInput} label="Assignment Name" />
-        <Field name="paper_url" type="text" component={RenderInput} label="Assignment Paper URL" />
+        <Field name="assignment" type="text" component={RenderInput} label="Assignment Name" />
+        <Field name="url" type="text" component={RenderInput} label="Assignment Paper URL" />
         <Field name="max_marks" type="number" component={RenderInput} label="Max Marks" />
         <Field name="due_date" type="date" component={RenderDate} label="Due Date" />
         <Field name="end_date" type="date" component={RenderDate} label="End Date" />

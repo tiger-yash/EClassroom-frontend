@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 const apiInstanceObject = () =>
   axios.create({
-    baseURL: "http://localhost:8000",
+    baseURL: "https://eclassroom-apis.herokuapp.com/",
     headers: {
       Authorization: `Token ${Cookies.get("token")}`
     }

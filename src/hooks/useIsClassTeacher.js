@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import { fetchClass, fetchUserProfile } from "../actions";
 
-const useIsClassTeacher = () => {
+const useIsClassTeacher = config => {
   const { classId } = useParams();
   const dispatch = useDispatch();
   const { user, auth, classData } = useSelector(state => ({
@@ -12,7 +12,7 @@ const useIsClassTeacher = () => {
     auth: state.auth,
     classData: state.classes[classId]
   }));
-  console.log(user, auth, classData);
+  // console.log(user, auth, classData);
 
   useEffect(() => {
     dispatch(fetchClass(classId));
@@ -20,9 +20,9 @@ const useIsClassTeacher = () => {
 
   useEffect(() => {
     if (user.username && classData && classData.teacher && user.username !== classData.teacher) {
-      dispatch(push("/class/"));
+      if (config.redirect) dispatch(push("/class/"));
     }
-  }, [classData, user.username, dispatch]);
+  }, [classData, user.username, dispatch, config.redirect]);
 
   useEffect(() => {
     if (!auth.isSignedIn) dispatch(push("/login/"));

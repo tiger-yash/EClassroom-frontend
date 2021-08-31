@@ -8,17 +8,19 @@ import Button from "@material-ui/core/Button";
 import useIsClassTeacher from "../hooks/useIsClassTeacher";
 
 const CreateTest = props => {
-  const { createTest, handleSubmit, submitting } = props;
-  const isClassTeacher = useIsClassTeacher();
+  const { classData, createTest, handleSubmit, submitting } = props;
+  const isClassTeacher = useIsClassTeacher({ redirect: true });
   console.log(isClassTeacher);
 
+  const submitHandler = values => {
+    createTest({ ...values, class_code: classData.classCode });
+  };
   return (
     <div className="w-1/2 mx-auto mt-4">
       <h2 className="text-xl">Create Test</h2>
-
-      <form onSubmit={handleSubmit(createTest)}>
-        <Field name="test_name" type="text" component={RenderInput} label="Test Name" />
-        <Field name="paper_url" type="text" component={RenderInput} label="Test Paper URL" />
+      <form onSubmit={handleSubmit(submitHandler)}>
+        <Field name="test" type="text" component={RenderInput} label="Test Name" />
+        <Field name="url" type="text" component={RenderInput} label="Test Paper URL" />
         <Field name="max_marks" type="number" component={RenderInput} label="Max Marks" />
         <Field name="due_date" type="date" component={RenderDate} label="Due Date" />
         <Field name="end_date" type="date" component={RenderDate} label="End Date" />

@@ -8,11 +8,13 @@ const RenderDate = ({ input, label, meta: { touched, error } }) => {
         {...input}
         value={input.value ? input.value : null}
         label={label}
-        variant="inline"
+        variant="dialog"
+        ampm={false}
         inputVariant="outlined"
         helperText={touched && error}
         error={Boolean(touched && error)}
         className=""
+        okLabel="OK"
         format="yyyy-MM-dd hh:mm:ss"
       />
     </div>

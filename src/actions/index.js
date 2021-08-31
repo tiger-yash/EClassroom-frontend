@@ -203,12 +203,22 @@ export const fetchAssignment = (classCode, assignmentId) => async dispatch => {
 };
 
 export const createTest = testData => async dispatch => {
-  const response = await api.post("/class/test/", testData);
-  const { data } = response;
-  dispatch({
-    type: CREATE_TEST,
-    payload: data
+  console.log(testData);
+  const response = await api.post("/class/test/", testData).catch(error => {
+    console.log(error);
+    console.log(error.response);
+    // if (error.response && error.repsonse.data) {
+    //   console.log(error.response.data);
+    // }
   });
+  if (response && response.data) {
+    const { data } = response;
+    console.log(data);
+    dispatch({
+      type: CREATE_TEST,
+      payload: data
+    });
+  }
 };
 
 export const createAssignment = assignmentData => async dispatch => {
