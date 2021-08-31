@@ -50,7 +50,6 @@ const Header = ({ signOut, isSignedIn, redirect }) => {
               <AddIcon />
             </IconButton>
           ) : null}
-
         </div>
         <Button variant="contained" color="primary" onClick={onClick}>
           <p className="">{text}</p>
