@@ -10,7 +10,6 @@ const RenderDate = ({ input, label, meta: { touched, error } }) => {
         label={label}
         variant="inline"
         inputVariant="outlined"
-        clearable
         helperText={touched && error}
         error={Boolean(touched && error)}
         className=""

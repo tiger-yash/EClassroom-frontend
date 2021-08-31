@@ -42,8 +42,8 @@ const CustomSnackBar = ({ snackPack = [], snackBarClose }) => {
       autoHideDuration={2000}
       onClose={handleClose}
       TransitionProps={{ onExited: handleExited }}>
-      <Alert onClose={handleClose} severity={messageInfo ? messageInfo.type : null}>
-        {messageInfo ? messageInfo.message : null}
+      <Alert onClose={handleClose} severity={messageInfo ? messageInfo.type : "error"}>
+        {messageInfo ? messageInfo.message : ""}
       </Alert>
     </Snackbar>
   );

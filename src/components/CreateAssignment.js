@@ -1,34 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import { createAssignment } from "../actions";
-import { push } from "connected-react-router";
 import RenderInput from "./RenderInput";
 import RenderDate from "./RenderDate";
 import Button from "@material-ui/core/Button";
-import { fetchClass } from "../actions";
+import useIsClassTeacher from "../hooks/useIsClassTeacher";
 
 const CreateAssignment = props => {
-  const { user, classData, auth, push, createAssignment, handleSubmit, submitting, fetchClass } =
-    props;
-
-  // useEffect(() => {
-  //   if (!user.isTeacher) push("/classes/");
-  // }, [user.isTeacher, push]);
-  useEffect(() => {
-    fetchClass(props.match.params.classId);
-  }, [props.match.params.classId, fetchClass]);
-
-  useEffect(() => {
-    if (user.username && classData && classData.teacher && user.username !== classData.teacher) {
-      push("/class/");
-    }
-  }, [classData, user.username, push]);
-
-  useEffect(() => {
-    console.log(auth.isSignedIn);
-    if (!auth.isSignedIn) push("/login/");
-  }, [auth.isSignedIn, push]);
+  const { createAssignment, handleSubmit, submitting } = props;
+  const isClassTeacher = useIsClassTeacher();
+  console.log(isClassTeacher);
 
   return (
     <div className="w-1/2 mx-auto mt-4">
@@ -67,7 +49,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, { createAssignment, push, fetchClass })(
+export default connect(mapStateToProps, { createAssignment })(
   reduxForm({
     form: "createAssignment",
     validate
