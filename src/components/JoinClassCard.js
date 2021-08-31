@@ -49,29 +49,3 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 export default connect(mapStateToProps, { joinClass })(JoinClassCard);
-
-
-// <Grid item xs={3}>
-//       <Card variant="outlined" className="w-full h-full">
-//         <CardContent>
-//           <Typography variant="h6" component="h2" className="mb-6" color="textPrimary" gutterBottom>
-//             Join New Class
-//           </Typography>
-//           <TextField
-//             label="Class Code"
-//             variant="outlined"
-//             className="w-full"
-//             value={classCode}
-//             onChange={e => setClassCode(e.target.value)}
-//           />
-//         </CardContent>
-//         <CardActions className="display-flex">
-//           <Button
-//             size="medium"
-//             className="ml-auto"
-//             onClick={() => joinClass({ class_code: classCode })}>
-//             Join
-//           </Button>
-//         </CardActions>
-//       </Card>
-//     </Grid>

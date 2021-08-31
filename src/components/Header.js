@@ -40,8 +40,6 @@ const Header = ({ signOut, isSignedIn, redirect }) => {
     return (
       <>
         <div className={classes.root}>
-          {/* <Button > */}
-          {/* <Icon style={{ color: green[500],fontSize: 30, marginTop:5  }}>add_circle</Icon> */}
           {isSignedIn ? (
             <IconButton
               style={{ color: green[500] }}
@@ -53,7 +51,6 @@ const Header = ({ signOut, isSignedIn, redirect }) => {
             </IconButton>
           ) : null}
 
-          {/* </Button> */}
         </div>
         <Button variant="contained" color="primary" onClick={onClick}>
           <p className="">{text}</p>
