@@ -13,7 +13,7 @@ import renderSelect from "./RenderSelect";
 import _ from "lodash";
 
 let SignUpForm = props => {
-  const { push, isGoogleSignedIn, handleSubmit, submitting, signIn, snackBarError } = props;
+  const { push, isGoogleSignedIn, handleSubmit, submitting, signIn, snackBarError, change } = props;
   const [authMethod, setAuthMethod] = useState(LOCAL);
   const [toRedirect, setToRedirect] = useState(false);
 
@@ -34,6 +34,9 @@ let SignUpForm = props => {
         try {
           await tryGoogleSignIn();
           setAuthMethod(GOOGLE);
+          const profile = getGoogleProfile();
+          change("email", profile.getEmail());
+          change("username", profile.getName());
         } catch (e) {
           console.log(e);
         }
@@ -132,7 +135,7 @@ let SignUpForm = props => {
             label="Role"
           />
           <div className="flex mt-3">
-            {/* <Button
+            <Button
               onClick={() => {
                 setAuthMethod(LOCAL);
               }}
@@ -141,7 +144,7 @@ let SignUpForm = props => {
               className="mr-3"
               disabled={submitting}>
               Email Sign Up
-            </Button> */}
+            </Button>
             {renderGoogleAuthButton()}
             <Button
               variant="contained"

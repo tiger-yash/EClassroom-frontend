@@ -8,15 +8,17 @@ import Button from "@material-ui/core/Button";
 import useIsClassTeacher from "../hooks/useIsClassTeacher";
 
 const CreateAssignment = props => {
-  const { createAssignment, handleSubmit, submitting } = props;
-  const isClassTeacher = useIsClassTeacher({ redirect: true });
-  console.log(isClassTeacher);
+  const { classData, createAssignment, handleSubmit, submitting } = props;
+  useIsClassTeacher({ redirect: true });
+
+  const submitHandler = values => {
+    createAssignment({ ...values, class_code: classData.classCode });
+  };
 
   return (
     <div className="w-1/2 mx-auto mt-4">
       <h2 className="text-xl">Create Assignment</h2>
-
-      <form onSubmit={handleSubmit(createAssignment)}>
+      <form onSubmit={handleSubmit(submitHandler)}>
         <Field name="assignment" type="text" component={RenderInput} label="Assignment Name" />
         <Field name="url" type="text" component={RenderInput} label="Assignment Paper URL" />
         <Field name="max_marks" type="number" component={RenderInput} label="Max Marks" />

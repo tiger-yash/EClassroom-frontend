@@ -9,12 +9,12 @@ import useIsClassTeacher from "../hooks/useIsClassTeacher";
 
 const CreateTest = props => {
   const { classData, createTest, handleSubmit, submitting } = props;
-  const isClassTeacher = useIsClassTeacher({ redirect: true });
-  console.log(isClassTeacher);
+  useIsClassTeacher({ redirect: true });
 
   const submitHandler = values => {
     createTest({ ...values, class_code: classData.classCode });
   };
+
   return (
     <div className="w-1/2 mx-auto mt-4">
       <h2 className="text-xl">Create Test</h2>

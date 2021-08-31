@@ -14,7 +14,8 @@ const format = data => {
     id: data.id,
     classCode: data.class_code,
     subject: data.subject,
-    teacher: data.teacher
+    teacher: data.teacher,
+    students: data.students
   };
 };
 const classReducer = (state = INITIAL_STATE, action) => {

@@ -12,6 +12,7 @@ import {
   DELETE_CLASS,
   LEAVE_CLASS,
   FETCH_TESTS,
+  FETCH_TEST,
   CREATE_TEST,
   EDIT_ASSIGNMENT,
   EDIT_TEST,
@@ -184,12 +185,13 @@ export const fetchAllAssignments = classCode => async dispatch => {
   });
 };
 
-export const fetchTest = (classCode, testId) => async dispatch => {
-  const response = await api.get(`/student/test/${testId}/`, { class_code: classCode });
+export const fetchTest = testId => async dispatch => {
+  console.log(`/student/test/${testId}`);
+  const response = await api.get(`/student/test/${testId}`);
   const { data } = response;
   dispatch({
-    type: FETCH_TESTS,
-    payload: data
+    type: FETCH_TEST,
+    payload: { ...data, id: testId }
   });
 };
 
