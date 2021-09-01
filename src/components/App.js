@@ -53,8 +53,6 @@ const App = () => {
         <Route path="/class/:classId/assignment/:assignmentId" exact component={ViewAssignment} />
         <Route component={NotFound} />
       </Switch>
-
-      <Footer />
     </div>
   );
 };
