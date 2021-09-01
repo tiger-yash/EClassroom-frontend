@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <script src="https://kit.fontawesome.com/7c3398c69c.js" crossorigin="anonymous"></script>
     <script src="https://apis.google.com/js/api.js"></script>
+
     <!-- <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -28,6 +29,11 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <script>
+      window.loadPromise = new Promise(function (resolve) {
+        window.addEventListener("load", resolve);
+      });
+    </script>
     <title>React App</title>
   </head>
   <body>

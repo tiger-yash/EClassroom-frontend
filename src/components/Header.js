@@ -59,7 +59,7 @@ const Header = ({ signOut, isSignedIn, redirect }) => {
   };
   return (
     <>
-      <AppBar color="default" position="sticky" className="flex flex-row h-12 items-center p-6">
+      <AppBar color="default" position="fixed" className="flex flex-row h-12 items-center p-6">
         {isSignedIn ? <SideNav /> : null}
         <Logo className="mr-auto" />
         {AuthButton()}

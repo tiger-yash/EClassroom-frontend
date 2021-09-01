@@ -12,7 +12,7 @@ const RenderTest = props => {
   const { isTeacher, test } = props;
 
   return (
-    <Box {...props} className="flex items-center my-2 bg-gray-300 p-2 rounded-md">
+    <Box className="flex items-center my-2 bg-gray-300 p-2 rounded-md">
       <Link to={`/class/${classId}/test/${test.id}`}>
         <Typography component="h2" variant="subtitle1" className="text-lg">
           {test.testName}
@@ -34,7 +34,7 @@ const RenderAssignment = props => {
   const { isTeacher, assignment } = props;
 
   return (
-    <Box {...props} className="flex items-center my-2 bg-gray-300 p-2 rounded-md">
+    <Box className="flex items-center my-2 bg-gray-300 p-2 rounded-md">
       <Link to={`/class/${classId}/assignment/${assignment.id}`}>
         <Typography component="h2" variant="subtitle1" className="text-lg">
           {assignment.assignmentName}

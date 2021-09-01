@@ -30,7 +30,7 @@ const ViewTest = props => {
       </div>
       {isClassTeacher === true ? (
         <>
-          <div>Submissions</div>
+          <p className="text-l font-medium my-3">Submissions</p>
           {testData
             ? _.map(props.testData.submissions, submission => <div>JSON.stringigy(submission)</div>)
             : null}
