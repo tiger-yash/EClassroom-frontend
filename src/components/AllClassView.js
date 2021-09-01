@@ -34,7 +34,7 @@ const ClassView = props => {
   // console.log(classes);
 
   return (
-    <Container>
+    <Container maxWidth="xl">
       <Grid container className="mt-3 items-stretch" spacing={2}>
         {isTeacher() ? <NewClassCard /> : null}
         {/* {isStudent() ? <JoinClassCard /> : null} */}

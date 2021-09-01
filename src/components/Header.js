@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Logo from "./Logo";
 import { connect } from "react-redux";
 import { signOut, redirect, joinClass } from "../actions";
-import { Button } from "@material-ui/core";
+import { AppBar, Button } from "@material-ui/core";
 import SideNav from "./SideNav";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
@@ -59,12 +59,17 @@ const Header = ({ signOut, isSignedIn, redirect }) => {
   };
   return (
     <>
-      <div className="flex h-12 items-center p-5 sticky top-0 bg-gray-200">
+      <AppBar color="default" position="sticky" className="flex flex-row h-12 items-center p-6">
         {isSignedIn ? <SideNav /> : null}
         <Logo className="mr-auto" />
         {AuthButton()}
-      </div>
-      <JoinClassCard show={showJoinDialog} confirm={confirm} cancel={cancel} />
+      </AppBar>
+      <JoinClassCard
+        classes={classes.join}
+        show={showJoinDialog}
+        confirm={confirm}
+        cancel={cancel}
+      />
     </>
   );
 };

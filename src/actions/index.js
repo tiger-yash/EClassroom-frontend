@@ -182,7 +182,7 @@ export const fetchAllTests = classCode => async dispatch => {
     const { data } = response;
     dispatch({
       type: FETCH_TESTS,
-      payload: data
+      payload: data.tests
     });
   }
 };
@@ -202,7 +202,7 @@ export const fetchAllAssignments = classCode => async dispatch => {
     const { data } = response;
     dispatch({
       type: FETCH_ASSIGNMENTS,
-      payload: data
+      payload: data.assignments
     });
   }
 };
