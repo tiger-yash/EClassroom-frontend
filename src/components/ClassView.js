@@ -9,16 +9,17 @@ import RenderField from "./RenderField";
 
 const ClassView = props => {
   const { classData, tests, assignments, fetchAllAssignments, fetchAllTests } = props;
+  const { subject, classCode, teacher } = classData;
   const classId = props.match.params.classId;
   const isClassTeacher = useIsClassTeacher({ redirect: false });
 
   useEffect(() => {
-    if (classId) fetchAllTests(classId);
-  }, [classId, fetchAllTests]);
+    if (classCode) fetchAllTests(classCode);
+  }, [classCode, fetchAllTests]);
 
   useEffect(() => {
-    if (classId) fetchAllAssignments(classId);
-  }, [classId, fetchAllAssignments]);
+    if (classCode) fetchAllAssignments(classCode);
+  }, [classCode, fetchAllAssignments]);
 
   console.log(classData);
   return (
@@ -30,9 +31,9 @@ const ClassView = props => {
         <div className="mx-3">
           {!_.isEmpty(classData) ? (
             <>
-              <RenderField name="Subject" value={classData.subject} />
-              <RenderField name="Teacher" value={classData.teacher} />
-              <RenderField name="Class Code" value={classData.classCode} />
+              <RenderField name="Subject" value={subject} />
+              <RenderField name="Teacher" value={teacher} />
+              <RenderField name="Class Code" value={classCode} />
             </>
           ) : null}
         </div>

@@ -168,21 +168,43 @@ export const fetchAllClasses = () => async dispatch => {
 };
 
 export const fetchAllTests = classCode => async dispatch => {
-  const response = await api.get(`/class/test/`, { class_code: classCode });
-  const { data } = response;
-  dispatch({
-    type: FETCH_TESTS,
-    payload: data
-  });
+  console.log(classCode);
+  const response = await api
+    .get(`/class/test/`, {
+      params: {
+        class_code: classCode
+      }
+    })
+    .catch(error => {
+      console.dir(error);
+    });
+  if (response) {
+    const { data } = response;
+    dispatch({
+      type: FETCH_TESTS,
+      payload: data
+    });
+  }
 };
 
 export const fetchAllAssignments = classCode => async dispatch => {
-  const response = await api.get(`/class/assignment/`, { class_code: classCode });
-  const { data } = response;
-  dispatch({
-    type: FETCH_ASSIGNMENTS,
-    payload: data
-  });
+  console.log(classCode);
+  const response = await api
+    .get(`/class/assignment/`, {
+      params: {
+        class_code: classCode
+      }
+    })
+    .catch(error => {
+      console.dir(error);
+    });
+  if (response) {
+    const { data } = response;
+    dispatch({
+      type: FETCH_ASSIGNMENTS,
+      payload: data
+    });
+  }
 };
 
 export const fetchTest = testId => async dispatch => {
