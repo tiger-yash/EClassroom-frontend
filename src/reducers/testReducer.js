@@ -4,7 +4,8 @@ import {
   SUBMIT_TEST,
   CREATE_TEST,
   DELETE_TEST,
-  EDIT_TEST
+  EDIT_TEST,
+  SIGN_OUT
 } from "../constants";
 import _ from "lodash";
 const INITIAL_STATE = {};
@@ -35,6 +36,8 @@ const testReducer = (state = INITIAL_STATE, action) => {
       return _.omit(state, action.payload);
     case FETCH_TESTS:
       return _.chain(action.payload).mapKeys("id").mapValues(format).value();
+    case SIGN_OUT:
+      return INITIAL_STATE;
     default:
       return state;
   }

@@ -39,6 +39,11 @@ let SignUpForm = props => {
           change("username", profile.getName());
         } catch (e) {
           console.log(e);
+          if (e.error && e.error === "pop_up_closed_by_user") {
+            return;
+          } else {
+            snackBarError(e.message);
+          }
         }
       };
     }

@@ -7,7 +7,8 @@ import ClassCard from "./ClassCard";
 import NewClassCard from "./NewClassCard";
 // import JoinClassCard from "./JoinClassCard";
 // import { makeStyles } from "@material-ui/core";
-import { Grid } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
 import _ from "lodash";
 
 const ClassView = props => {
@@ -30,18 +31,18 @@ const ClassView = props => {
 
   // const isStudent = () => user.role === STUDENT;
   const isTeacher = () => user.role === TEACHER;
-  // console.log(isTeacher());
-  // console.log(isStudent());
   // console.log(classes);
 
   return (
-    <Grid container className="mt-3 items-stretch" spacing={2}>
-      {isTeacher() ? <NewClassCard /> : null}
-      {/* {isStudent() ? <JoinClassCard /> : null} */}
-      {classes.map(classData => (
-        <ClassCard key={classData.id} classId={classData.id} />
-      ))}
-    </Grid>
+    <Container>
+      <Grid container className="mt-3 items-stretch" spacing={2}>
+        {isTeacher() ? <NewClassCard /> : null}
+        {/* {isStudent() ? <JoinClassCard /> : null} */}
+        {classes.map(classData => (
+          <ClassCard key={classData.id} classId={classData.id} />
+        ))}
+      </Grid>
+    </Container>
   );
 };
 

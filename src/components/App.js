@@ -8,7 +8,6 @@ import Signup from "./Signup";
 import Profile from "./Profile";
 import AllClassView from "./AllClassView";
 import SnackBar from "./SnackBar";
-import Container from "@material-ui/core/Container";
 import CreateTest from "./CreateTest";
 import EditTest from "./EditTest";
 import ViewTest from "./ViewTest";
@@ -17,8 +16,10 @@ import EditAssignment from "./EditAssignment";
 import ViewAssignment from "./ViewAssignment";
 
 // eslint-disable-next-line
-// import "../gauth";
+import "../gauth";
+// eslint-disable-next-line
 import { GoogleAuth } from "../gauth";
+import ClassView from "./ClassView";
 
 const NotFound = () => {
   return (
@@ -35,32 +36,24 @@ const App = () => {
 
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route>
-          <Container maxWidth="xl">
-            <Switch>
-              <Route path="/login" exact component={Login} />
-              <Route path="/signup" exact component={Signup} />
-              <Route path="/profile" exact component={Profile} />
-              <Route path="/class" exact component={AllClassView} />
-              <Route path="/class/:classId/test/create" exact component={CreateTest} />
-              <Route path="/class/:classId/assignment/create" exact component={CreateAssignment} />
-              <Route path="/class/:classId/test/:testId/edit" exact component={EditTest} />
-              <Route
-                path="/class/:classId/assignment/:assignmentId/edit"
-                exact
-                component={EditAssignment}
-              />
-              <Route path="/class/:classId/test/:testId" exact component={ViewTest} />
-              <Route
-                path="/class/:classId/assignment/:assignmentId"
-                exact
-                component={ViewAssignment}
-              />
-              <Route component={NotFound} />
-            </Switch>
-          </Container>
-        </Route>
+        <Route path="/login" exact component={Login} />
+        <Route path="/signup" exact component={Signup} />
+        <Route path="/profile" exact component={Profile} />
+        <Route path="/class" exact component={AllClassView} />
+        <Route path="/class/:classId" exact component={ClassView} />
+        <Route path="/class/:classId/test/create" exact component={CreateTest} />
+        <Route path="/class/:classId/assignment/create" exact component={CreateAssignment} />
+        <Route path="/class/:classId/test/:testId/edit" exact component={EditTest} />
+        <Route
+          path="/class/:classId/assignment/:assignmentId/edit"
+          exact
+          component={EditAssignment}
+        />
+        <Route path="/class/:classId/test/:testId" exact component={ViewTest} />
+        <Route path="/class/:classId/assignment/:assignmentId" exact component={ViewAssignment} />
+        <Route component={NotFound} />
       </Switch>
+
       <Footer />
     </div>
   );

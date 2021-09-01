@@ -22,7 +22,9 @@ const EditAssignment = props => {
   const classId = props.match.params.classId;
   const [loaded, setLoaded] = useState(false);
 
-  useIsClassTeacher({ redirect: true });
+  const isClassTeacher = useIsClassTeacher({ redirect: true });
+  console.log(isClassTeacher);
+
   useEffect(() => {
     if (!_.isEmpty(assignmentData)) {
       if (!loaded) {
@@ -37,10 +39,10 @@ const EditAssignment = props => {
   }, [change, assignmentData, loaded]);
 
   useEffect(() => {
-    if (assignmentId && classData.classCode) {
+    if (assignmentId && isClassTeacher) {
       fetchAssignment(assignmentId);
     }
-  }, [classData.classCode, fetchAssignment, assignmentId]);
+  }, [isClassTeacher, fetchAssignment, assignmentId]);
 
   const submitHandler = values => {
     editAssignment(classId, assignmentId, { ...values, class_code: classData.classCode });

@@ -13,8 +13,9 @@ const EditTest = props => {
   const [loaded, setLoaded] = useState(false);
   const testId = props.match.params.testId;
   const classId = props.match.params.classId;
+  const isClassTeacher = useIsClassTeacher({ redirect: true });
+  console.log(isClassTeacher);
 
-  useIsClassTeacher({ redirect: true });
   useEffect(() => {
     if (!_.isEmpty(testData)) {
       if (!loaded) {
@@ -29,10 +30,10 @@ const EditTest = props => {
   }, [change, testData, loaded]);
 
   useEffect(() => {
-    if (testId) {
+    if (testId && isClassTeacher) {
       fetchTest(testId);
     }
-  }, [fetchTest, testId]);
+  }, [fetchTest, testId, isClassTeacher]);
 
   const submitHandler = values => {
     console.log(values);

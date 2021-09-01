@@ -4,7 +4,8 @@ import {
   EDIT_ASSIGNMENT,
   SUBMIT_ASSIGNMENT,
   FETCH_ASSIGNMENT,
-  FETCH_ASSIGNMENTS
+  FETCH_ASSIGNMENTS,
+  SIGN_OUT
 } from "../constants";
 import _ from "lodash";
 const INITIAL_STATE = {};
@@ -35,6 +36,8 @@ const assignmentReducer = (state = INITIAL_STATE, action) => {
       return _.omit(state, action.payload);
     case FETCH_ASSIGNMENTS:
       return _.chain(action.payload).mapKeys("id").mapValues(format).value();
+    case SIGN_OUT:
+      return INITIAL_STATE;
     default:
       return state;
   }
